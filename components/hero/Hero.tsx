@@ -1,13 +1,55 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { fadeIn, riseIn, stage } from "@/lib/motion";
+import { motion, type Variants } from "framer-motion";
+import { EASE_LUX, fadeIn, riseIn, stage } from "@/lib/motion";
 import HeroPlate from "./HeroPlate";
 import HeroLockup from "./HeroLockup";
 import HeroRail from "./HeroRail";
 import PrimaryCta from "./PrimaryCta";
+import SecondaryCta from "./SecondaryCta";
 import SectorStrip from "./SectorStrip";
 import TrustBar from "./TrustBar";
+
+// Two cinematic beats settle — heavier and slower than the standard riseIn —
+// before the subtitle and CTAs are allowed to arrive.
+const beatOne: Variants = {
+  hidden: { opacity: 0, y: 26, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 1.1, ease: EASE_LUX },
+  },
+};
+
+const beatTwo: Variants = {
+  hidden: { opacity: 0, y: 26, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 1.1, ease: EASE_LUX, delay: 0.6 },
+  },
+};
+
+// Only once the headline has settled.
+const settledIn: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.95, ease: EASE_LUX, delay: 1.75 },
+  },
+};
+
+// The quiet beat — the secondary cta and the closing note. Fade only, no rise.
+const quietIn: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 1.1, ease: EASE_LUX, delay: 2.35 },
+  },
+};
 
 export default function Hero() {
   return (
@@ -39,31 +81,36 @@ export default function Hero() {
               </span>
             </motion.p>
 
-            <motion.h1
+            <h1
               id="hero-title"
-              variants={riseIn}
               className="mt-7 font-display text-hero-sm font-extrabold text-sand-100 [text-shadow:0_6px_34px_rgba(0,0,0,0.65)] md:text-hero-md lg:text-hero-lg"
             >
-              <span className="block">مشروعك يستحق</span>
-              <span className="mt-1 block">
-                <span className="gold-text">بداية تليق بطموحك</span>
-                <span className="text-gold-300">.</span>
-              </span>
-            </motion.h1>
+              <motion.span variants={beatOne} className="block">
+                نبني هوية مشروعك
+              </motion.span>
+              <motion.span variants={beatTwo} className="mt-1 block gold-text">
+                كما لو كان مشروعنا.
+              </motion.span>
+            </h1>
 
             <motion.p
-              variants={riseIn}
+              variants={settledIn}
               className="mt-6 max-w-[33rem] font-body text-base font-light leading-[2] text-sand-300 md:text-[1.06rem]"
             >
               نحوّل فكرتك إلى هوية احترافية متكاملة، ونساعدك في إطلاق مشروعك بثقة واحتراف.
             </motion.p>
 
-            <motion.div variants={riseIn} className="mt-9 w-full">
-              <PrimaryCta href="#sectors" label="ابدأ مشروعك الآن" />
-            </motion.div>
+            <div className="mt-9 flex w-full flex-col items-start gap-5">
+              <motion.div variants={settledIn} className="w-full">
+                <PrimaryCta href="#sectors" label="ابدأ مشروعك" />
+              </motion.div>
+              <motion.div variants={quietIn}>
+                <SecondaryCta href="#sectors" label="ادخل إلى الاستوديو" />
+              </motion.div>
+            </div>
 
-            <motion.p variants={riseIn} className="mt-5 font-body text-sm font-light text-sand-400">
-              اختر نشاطك… والباقي علينا.
+            <motion.p variants={quietIn} className="mt-5 font-body text-sm font-light text-sand-400">
+              من هنا تبدأ ولادة علامتك.
             </motion.p>
           </div>
 

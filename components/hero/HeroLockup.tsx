@@ -1,8 +1,19 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { lockupIn } from "@/lib/motion";
+import { motion, type Variants } from "framer-motion";
+import { EASE_LUX, lockupIn } from "@/lib/motion";
 import TurjomanMark from "./TurjomanMark";
+
+// The emblem only ever fades. No scale, no rotation, no morph — the mark is
+// locked, and its entrance must be as still as the mark itself. It waits for
+// the first headline beat to settle before it appears.
+const emblemIn: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 1.8, ease: EASE_LUX, delay: 1.15 },
+  },
+};
 
 export default function HeroLockup() {
   return (
@@ -14,10 +25,12 @@ export default function HeroLockup() {
       <div className="absolute inset-[-18%] -z-20 rounded-full bg-[radial-gradient(circle,rgba(6,4,3,0.62)_0%,rgba(6,4,3,0.28)_45%,transparent_70%)] blur-2xl" />
       <div className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle,rgba(212,168,83,0.16)_0%,transparent_62%)] blur-2xl" />
 
-      <TurjomanMark
-        id="hero-mark"
-        className="h-24 w-auto drop-shadow-[0_22px_44px_rgba(0,0,0,0.75)] md:h-28 lg:h-[7.2rem]"
-      />
+      <motion.div variants={emblemIn}>
+        <TurjomanMark
+          id="hero-mark"
+          className="h-24 w-auto drop-shadow-[0_22px_44px_rgba(0,0,0,0.75)] md:h-28 lg:h-[7.2rem]"
+        />
+      </motion.div>
 
       <p className="mt-4 font-display text-5xl font-extrabold leading-none gold-text md:text-6xl lg:text-[4.6rem]">
         ترجمان
