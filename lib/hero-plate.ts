@@ -44,4 +44,4 @@ export const HERO_PLATE: Record<"desktop" | "tablet" | "mobile", Plate> = {
 
 /** 20px LQIP of the master — first paint is the room's colour field, not black. */
 export const HERO_PLATE_LQIP =
-  "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAACwAwCdASoUAA0APu1iqU2ppaQiMAgBMB2JZQCdAB6A7Mp80uwDgAD+5CKb9lp0NjF4x5OdKIL/bgCHQmQG3F5/agWgKIw5okOZQ+yDbcJtMTRLMb9oJR60Cp/SuQb8PcMrhXURBOdE+OfrUNL2AAAA";
+  "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQBACdASoUAA0APu1kqU2ppaOiMAgBMB2JZQCsAB9FWlDiYC8Cwf6qTAD85gRJtjdJpa/o1dmi9r3gwldNRqohjJ9I8YveqGzbaoskFYi7Jx8Z4oN9jLHs4B4Ykx4AAAA=";
